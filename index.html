@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário</title>
+  <style>
+    label{
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      margin-bottom: .5rem;
+      margin-top: 1rem;
+    }
+    form{
+      width: 400px;
+      margin: 0 auto;
+    }
+    input, textarea{
+      width: 100%;
+      border: 2px solid #000;
+      box-sizing: border-box;
+      padding: .5rem;
+      font-size: 1rem;
+      margin-bottom: .5rem;
+    }
+    textarea{
+      height: 150px;
+    }
+    .invalid{
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <form name="contato" id="contato">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" required>
+    <span class="erro"></span>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required>
+    <span class="erro"></span>
+    <label for="mensagem">Mensagem</label>
+    <textarea name="mensagem" id="mensagem"></textarea>
+  </form>
+
+  <script>
+    const form = document.forms.contato;
+    
+    function handleForm(event){
+      const target = event.target;
+      if(!target.checkValidity()){
+        target.classList.add('invalid')
+        form.nome.setCustomValidity('Coloque seu nome!')
+        target.nextElementSibling.innerText = target.validationMessage;
+      }
+      console.log(event.target.value)
+    }
+
+    form.addEventListener('change', handleForm)
+  </script>
+</body>
+</html>
